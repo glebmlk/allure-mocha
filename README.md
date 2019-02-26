@@ -24,6 +24,7 @@ Also check out [mocha-allure-example](https://github.com/allure-examples/mocha-a
 ## Supported options
 
 * targetDir _(string)_ – directory where test results will be stored
+* ignoreErrors _(boolean)_ - ignore non-Assertion errors. If true, will mark test as failed if any error is catched
 
 ## Runtime API
 
