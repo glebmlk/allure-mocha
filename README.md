@@ -1,4 +1,4 @@
-# mocha-allure-reporter [![Build Status](https://travis-ci.org/allure-framework/allure-mocha.svg?branch=master)](https://travis-ci.org/allure-framework/allure-mocha)
+# allure-mocha-reporter [![Build Status](https://travis-ci.org/allure-framework/allure-mocha.svg?branch=master)](https://travis-ci.org/allure-framework/allure-mocha)
 Allure reporter for Mocha
 
 ## Installation
