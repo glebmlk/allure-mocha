@@ -1,7 +1,9 @@
 test
+.vscode
 
 .babelrc
 .editorconfig
 .eslintrc
 .travis.yml
+.gitignore
 index.js
