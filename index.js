@@ -1,4 +1,5 @@
 const Base = require('mocha').reporters.Base;
+const constants = require('mocha').Runner.constants;
 const Allure = require('allure-js-commons');
 const Runtime = require('allure-js-commons/runtime');
 const AssertionError = require('chai').AssertionError;
@@ -58,15 +59,15 @@ class AllureReporter extends Base {
             };
         };
 
-        runner.on('suite', invokeHandler((suite) => {
+        runner.on(constants.EVENT_SUITE_BEGIN, invokeHandler((suite) => {
             allureReporter.startSuite(suite.fullTitle());
         }));
 
-        runner.on('suite end', invokeHandler(() => {
+        runner.on(constants.EVENT_SUITE_END, invokeHandler(() => {
             allureReporter.endSuite();
         }));
 
-        runner.on('test', invokeHandler((test) => {
+        runner.on(constants.EVENT_TEST_BEGIN, invokeHandler((test) => {
             if (typeof test.currentRetry !== 'function' || !test.currentRetry()) {
                 allureReporter.startCase(test.title);
             }
@@ -74,7 +75,7 @@ class AllureReporter extends Base {
             allureReporter.endCase();
         }));
 
-        runner.on('pending', invokeHandler((test) => {
+        runner.on(constants.EVENT_TEST_PENDING, invokeHandler((test) => {
             const currentTest = allureReporter.getCurrentTest();
 
             if (currentTest && currentTest.name === test.title) {
@@ -84,11 +85,11 @@ class AllureReporter extends Base {
             }
         }));
 
-        runner.on('pass', invokeHandler(() => {
+        runner.on(constants.EVENT_TEST_PASS, invokeHandler(() => {
             allureReporter.endCase('passed');
         }));
 
-        runner.on('fail', invokeHandler((test, err) => {
+        runner.on(constants.EVENT_TEST_FAIL, invokeHandler((test, err) => {
             if (!allureReporter.getCurrentTest()) {
                 allureReporter.startCase(test.title);
             }
@@ -114,7 +115,7 @@ class AllureReporter extends Base {
             allureReporter.endCase(status, err);
         }));
 
-        runner.on('hook end', invokeHandler((hook) => {
+        runner.on(constants.EVENT_HOOK_END, invokeHandler((hook) => {
             if (hook.title.indexOf('\'after each\' hook') === 0) {
                 allureReporter.endCase('passed');
             }
