@@ -12,7 +12,7 @@
     "e2e-test": "npm run e2e-clean && node test/e2e/main.spec.js && allure generate test/e2e/results --clean -o test/e2e/report",
     "build": "npm run pretest && babel index.js -d dist",
     "prepare:publish": "npm run build && yes | cp -rf package.json README.md dist/",
-    "publish": "file=$(npm pack dist/) && npm publish $file"
+    "publish": "npm run prepare:publish && file=$(npm pack dist/) && npm publish $file"
   },
   "license": "Apache-2.0",
   "devDependencies": {
